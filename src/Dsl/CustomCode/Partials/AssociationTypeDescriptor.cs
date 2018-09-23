@@ -29,6 +29,18 @@ namespace Sawczyn.EFDesigner.EFModel
          {
             storeDomainDataDirectory = association.Store.DomainDataDirectory;
 
+            // don't show delete actions unless that end is the principal role
+            if (association.SourceRole != EndpointRole.Principal)
+            {
+               PropertyDescriptor sourceDeleteActionTypeDescriptor = propertyDescriptors.OfType<PropertyDescriptor>().Single(x => x.Name == "SourceDeleteAction");
+               propertyDescriptors.Remove(sourceDeleteActionTypeDescriptor);
+            }
+            if (association.TargetRole != EndpointRole.Principal)
+            {
+               PropertyDescriptor targetDeleteActionTypeDescriptor = propertyDescriptors.OfType<PropertyDescriptor>().Single(x => x.Name == "TargetDeleteAction");
+               propertyDescriptors.Remove(targetDeleteActionTypeDescriptor);
+            }
+
             /********************************************************************************/
 
             DomainPropertyInfo collectionClassPropertyInfo = storeDomainDataDirectory.GetDomainProperty(Association.CollectionClassDomainPropertyId);

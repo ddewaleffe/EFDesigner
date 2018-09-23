@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Dsl xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="9987f227-3d05-49b7-b151-857879f5dfb8" Description="Entity Framework visual editor for EF6, EFCore and beyond." Name="EFModel" DisplayName="Entity Framework Visual Editor" Namespace="Sawczyn.EFDesigner.EFModel" MinorVersion="2" Build="6" Revision="6" ProductName="EFDesigner" CompanyName="Michael Sawczyn" PackageGuid="56bbe1ba-aaee-4883-848f-e3c8656f8db2" PackageNamespace="Sawczyn.EFDesigner.EFModel" xmlns="http://schemas.microsoft.com/VisualStudio/2005/DslTools/DslDefinitionModel">
+<Dsl xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="9987f227-3d05-49b7-b151-857879f5dfb8" Description="Entity Framework visual editor for EF6, EFCore and beyond." Name="EFModel" DisplayName="Entity Framework Visual Editor" Namespace="Sawczyn.EFDesigner.EFModel" MinorVersion="2" Build="6" Revision="7" ProductName="EFDesigner" CompanyName="Michael Sawczyn" PackageGuid="56bbe1ba-aaee-4883-848f-e3c8656f8db2" PackageNamespace="Sawczyn.EFDesigner.EFModel" xmlns="http://schemas.microsoft.com/VisualStudio/2005/DslTools/DslDefinitionModel">
   <Classes>
     <DomainClass Id="95532cb8-3452-4b09-a654-aeb2e2d0b3ad" Description="" Name="ModelRoot" DisplayName="Entity Model" Namespace="Sawczyn.EFDesigner.EFModel">
       <CustomTypeDescriptor>
@@ -353,6 +353,14 @@
           </Type>
         </DomainProperty>
         <DomainProperty Id="5ff45bb4-658f-412e-8cdc-2593d9ea3d37" Description="Brief code documentation" Name="Summary" DisplayName="Comment Summary" Category="Documentation">
+          <Attributes>
+            <ClrAttribute Name="System.ComponentModel.Editor">
+              <Parameters>
+                <AttributeParameter Value="typeof(System.ComponentModel.Design.MultilineStringEditor)" />
+                <AttributeParameter Value="typeof(System.Drawing.Design.UITypeEditor)" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>
@@ -602,6 +610,14 @@
           </Type>
         </DomainProperty>
         <DomainProperty Id="12ea7154-be17-4707-ac96-eb1f8f2029ce" Description="Brief code documentation" Name="Summary" DisplayName="Comment Summary" Category="Documentation">
+          <Attributes>
+            <ClrAttribute Name="System.ComponentModel.Editor">
+              <Parameters>
+                <AttributeParameter Value="typeof(System.ComponentModel.Design.MultilineStringEditor)" />
+                <AttributeParameter Value="typeof(System.Drawing.Design.UITypeEditor)" />
+              </Parameters>
+            </ClrAttribute>
+          </Attributes>
           <Type>
             <ExternalTypeMoniker Name="/System/String" />
           </Type>

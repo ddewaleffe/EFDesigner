@@ -7,7 +7,7 @@
 #><#@ import namespace="System.IO"
 #><#@ import namespace="System.Linq" #><#+
 
-// EFDesigner v1.2.6.6
+// EFDesigner v1.2.6.7
 // Copyright (c) 2017-2018 Michael Sawczyn
 // https://github.com/msawczyn/EFDesigner
 
@@ -416,10 +416,29 @@ void WriteDbContextEFCore(ModelRoot modelRoot)
          if (required)
             segments.Add("IsRequired()");
 
-         if (association.TargetDeleteAction != DeleteAction.Default)
+         if (association.SourceRole == EndpointRole.Principal && association.SourceDeleteAction != DeleteAction.Default)
          {
-            string willCascadeOnDelete = (association.TargetDeleteAction == DeleteAction.Cascade).ToString().ToLowerInvariant();
-            segments.Add($"WillCascadeOnDelete({willCascadeOnDelete})");
+            switch (association.SourceDeleteAction)
+            {
+               switch DeleteAction.Cascade:
+                  segments.Add($"OnDelete(DeleteBehavior.Cascade)");
+                  break;
+               switch DeleteAction.None:
+                  segments.Add($"OnDelete(DeleteBehavior.Restrict)");
+                  break;
+            }
+         }
+         if (association.TargetRole == EndpointRole.Principal && association.TargetDeleteAction != DeleteAction.Default)
+         {
+            switch (association.TargetDeleteAction)
+            {
+               switch DeleteAction.Cascade:
+                  segments.Add($"OnDelete(DeleteBehavior.Cascade)");
+                  break;
+               switch DeleteAction.None:
+                  segments.Add($"OnDelete(DeleteBehavior.Restrict)");
+                  break;
+            }
          }
 
          if (modelRoot.ChopMethodChains)
@@ -482,11 +501,30 @@ void WriteDbContextEFCore(ModelRoot modelRoot)
          if (required)
             segments.Add("IsRequired()");
 
-            if (association.SourceDeleteAction != DeleteAction.Default)
+         if (association.SourceRole == EndpointRole.Principal && association.SourceDeleteAction != DeleteAction.Default)
+         {
+            switch (association.SourceDeleteAction)
             {
-               string willCascadeOnDelete = (association.SourceDeleteAction == DeleteAction.Cascade).ToString().ToLowerInvariant();
-               segments.Add($"WillCascadeOnDelete({willCascadeOnDelete})");
+               switch DeleteAction.Cascade:
+                  segments.Add($"OnDelete(DeleteBehavior.Cascade)");
+                  break;
+               switch DeleteAction.None:
+                  segments.Add($"OnDelete(DeleteBehavior.Restrict)");
+                  break;
             }
+         }
+         if (association.TargetRole == EndpointRole.Principal && association.TargetDeleteAction != DeleteAction.Default)
+         {
+            switch (association.TargetDeleteAction)
+            {
+               switch DeleteAction.Cascade:
+                  segments.Add($"OnDelete(DeleteBehavior.Cascade)");
+                  break;
+               switch DeleteAction.None:
+                  segments.Add($"OnDelete(DeleteBehavior.Restrict)");
+                  break;
+            }
+         }
 
          if (modelRoot.ChopMethodChains)
             OutputChopped(segments);
